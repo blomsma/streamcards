@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamcards</title>
+    <link rel="stylesheet" href="vendor/tailwind.css">
+    <link rel="stylesheet" href="vendor/fonts.css">
+    <script src="vendor/lottie.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html, body {
+            overflow: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        html::-webkit-scrollbar, body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop playsinline id="videoBackground" class="fixed top-0 left-0 min-w-full min-h-full object-cover z-[-1] hidden"> <!-- Initially hidden -->
+        <source src="" type="video/mp4"> Je browser ondersteunt geen video tags.
+    </video>
+    <img id="imageBackground" src="" alt="Background Image" class="fixed top-0 left-0 min-w-full min-h-full object-cover z-[-1] hidden"> <!-- Initially hidden -->
+
+    <div id="backgroundOverlay" class="absolute inset-0 bg-black z-0"></div>
+    <div id="vignetteOverlay" class="absolute inset-0 pointer-events-none z-1" style="background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.4) 70%, black 100%); opacity: 0;"></div>
+    
+    <!-- Container for multiple overlay images -->
+    <div id="overlayImagesContainer" class="absolute inset-0 z-20 pointer-events-none"></div>
+
+    <div id="timerContainer" class="relative z-10 flex flex-col items-center justify-center min-h-screen p-4 text-center">
+
+        <div id="waitingMessage" class="text-3xl md:text-5xl font-semibold text-shadow hidden">
+            <!-- Content set by JS if needed, e.g., for errors -->
+        </div>
+
+        <div id="timerDisplay" class="hidden w-full max-w-4xl">
+            <h1 id="timerTitle" class="fade-element"></h1>
+            <div id="clockWrapper" class="inline-block rounded-lg fade-element">
+                <div id="clock">
+                    <span id="hours">00</span><span id="hoursSeparator">:</span><span id="minutes">00</span><span id="minutesSeparator">:</span><span id="seconds">00</span>
+                </div>
+            </div>
+            <div id="thankYouMessage" class="hidden">
+                Bedankt voor het kijken!
+            </div>
+        </div>
+    </div>
+    
+    <!-- Separate message layer (independent of timer) -->
+    <div id="realtimeMessageDisplay" class="absolute z-30 fade-element hidden" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+    
+    <script src="script.js" type="module"></script>
+</body>
+</html>

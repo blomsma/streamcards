@@ -1,0 +1,74 @@
+{
+  "dependencies": {
+    "express": "5.2.1",
+    "multer": "2.4.0",
+    "lottie-web": "5.12.2"
+  },
+  "name": "streamcards",
+  "version": "3.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test tests/*.test.cjs",
+    "build": "node scripts/build.cjs",
+    "test:browser": "node tests/local.browser.cjs"
+  },
+  "overrides": {
+    "gaxios": {
+      "uuid": "^11.1.1"
+    }
+  },
+  "devDependencies": {
+    "playwright": "1.63.0",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/roboto": "5.3.0",
+    "@fontsource/courier-prime": "5.3.0",
+    "@fontsource/lobster": "5.3.0",
+    "@fontsource/open-sans": "5.3.0",
+    "@fontsource/montserrat": "5.3.0",
+    "@fontsource/oswald": "5.3.0",
+    "@fontsource/lato": "5.3.0",
+    "@fontsource/playfair-display": "5.3.0",
+    "@fontsource/raleway": "5.3.0",
+    "@fontsource/ubuntu": "5.3.0",
+    "@fontsource/pt-sans": "5.3.0",
+    "@fontsource/nunito": "5.3.0",
+    "@fontsource/merriweather": "5.3.0",
+    "@fontsource/fira-sans": "5.3.0",
+    "@fontsource/quicksand": "5.3.0",
+    "@fontsource/pacifico": "5.3.0",
+    "@fontsource/rubik": "5.3.0",
+    "@fontsource/source-sans-pro": "5.3.0",
+    "@fontsource/signika": "5.3.0",
+    "@fontsource/comfortaa": "5.3.0",
+    "@fontsource/arvo": "5.3.0",
+    "@fontsource/cabin": "5.3.0",
+    "@fontsource/exo-2": "5.3.0",
+    "@fontsource/pt-serif": "5.3.0",
+    "@fontsource/varela-round": "5.3.0",
+    "@fontsource/abril-fatface": "5.3.0",
+    "@fontsource/orbitron": "5.3.0",
+    "@fontsource/bangers": "5.3.0",
+    "@fontsource/press-start-2p": "5.3.0",
+    "@fontsource/monoton": "5.3.0",
+    "@fontsource/cinzel": "5.3.0",
+    "@fontsource/black-ops-one": "5.3.0",
+    "@fontsource/fredericka-the-great": "5.3.0",
+    "@fontsource/luckiest-guy": "5.3.0",
+    "@fontsource/permanent-marker": "5.3.0",
+    "@fontsource/special-elite": "5.3.0",
+    "@fontsource/unica-one": "5.3.0",
+    "@fontsource/major-mono-display": "5.3.0",
+    "@fontsource/faster-one": "5.3.0",
+    "@fontsource/codystar": "5.3.0",
+    "@fontsource/vt323": "5.3.0",
+    "tailwindcss": "3.4.17",
+    "@tailwindcss/forms": "0.5.10",
+    "@tailwindcss/typography": "0.5.16",
+    "@tailwindcss/aspect-ratio": "0.4.2"
+  },
+  "description": "Offline Streamcards for a local event NUC",
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

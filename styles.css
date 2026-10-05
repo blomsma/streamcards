@@ -1,0 +1,347 @@
+/* Global Styles */
+html {
+    /* Set base font size relative to the smaller viewport dimension */
+    /* Adjust the multiplier (e.g., 1.5, 1.0) to fine-tune overall scale */
+    font-size: 1.2vmin; /* Base scaling unit */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden { display: none !important; }
+
+/* Clock separator styles */
+#hoursSeparator.hidden,
+#minutesSeparator.hidden {
+    display: none !important;
+}
+
+/* Link icon styles */
+.link-icon {
+    width: 1.25rem; 
+    height: 1.25rem; 
+    display: inline-block;
+    vertical-align: middle; 
+    margin-right: 0.25rem;
+    stroke: currentColor; 
+    stroke-width: 1.5;
+}
+
+/* Preview Pane Styles - REMOVED OLD STYLES */
+/* #previewContainer { ... } */
+/* #previewVideoBackground { ... } */
+/* #previewOverlay { ... } */
+/* #previewTimerDisplay { ... } */
+/* #previewTimerTitle { ... } */
+/* #previewClockWrapper { ... } */
+/* #previewClock { ... } */
+/* #previewRealtimeMessage { ... } */
+
+/* NEW Styles for Iframe Preview */
+#iframePreviewContainer {
+    /* Styles are mostly handled by Tailwind classes in the HTML:
+       relative w-full aspect-video overflow-hidden rounded-lg shadow-md bg-gray-800 */
+    /* Explicitly ensure width and aspect-ratio for robustness */
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 150px; /* Adjust as needed */
+}
+
+#previewIframe {
+    /* Styles handled by Tailwind classes in HTML:
+       absolute top-0 left-0 w-full h-full border-0 */
+    /* Ensure content scaling if needed, though modern browsers might handle it */
+    /* transform: scale(0.5); */ /* Example if direct embedding needs scaling */
+    /* transform-origin: 0 0; */
+}
+
+/* Footer styles */
+#appFooter {
+    font-size: 0.75rem;
+    color: #6b7280;
+    text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    margin-top: 2rem;
+    flex-shrink: 0;
+}
+
+/* index.html specific styles */
+.text-shadow { 
+    /* Use em units for relative scaling */
+    text-shadow: 0.05em 0.05em 0.1em rgba(0,0,0,0.7); 
+}
+.text-shadow-lg { /* Maybe slightly stronger for clock? */
+    /* Use em units for relative scaling */
+    text-shadow: 0.08em 0.08em 0.15em rgba(0,0,0,0.8);
+}
+
+.tabular-nums { 
+    font-variant-numeric: tabular-nums; 
+}
+
+/* Styles for main timer display */
+#timerContainer {
+    /* Prevent text selection on the timer page */
+    user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    /* ADDED Relative Positioning */
+    position: relative;
+    width: 100%; /* Ensure it takes full width */
+    height: 100vh; /* Ensure it takes full height */
+    overflow: hidden; /* Prevent positioned elements causing scroll */
+}
+
+#timerTitle,
+#clockWrapper, /* Apply fade to wrapper */
+#realtimeMessageDisplay {
+    /* Prevent text selection */
+    user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#timerTitle {
+    /* Prevent text selection */
+    user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    transition: opacity 0.5s ease-in-out;
+    /* ADDED Absolute Positioning Defaults */
+    position: absolute;
+    top: 30%; /* Default Y */
+    left: 50%; /* Default X */
+    transform: translate(-50%, -50%); /* Center at coordinates */
+    width: max-content; /* Prevent wrapping issues */
+    max-width: 90%; /* Avoid overflow */
+    /* Base styles - JS will override font/size/color/shadow */
+    /* Convert px to rem (assuming 16px base originally) */
+    font-size: 2.7rem; /* ~43px */
+    line-height: 1.2; /* Use unitless line-height */
+    font-weight: 700;
+    color: white;
+    /* text-shadow: 1px 1px 3px rgba(0,0,0,0.7); */ /* Base shadow set by JS */
+}
+
+/* Hide waiting message by default */
+#waitingMessage.hidden {
+    display: none;
+}
+
+/* Wrapper for main clock styling */
+#clockWrapper {
+    /* Defaults - will be overridden by JS */
+    /* Convert px to rem */
+    padding: 1rem; /* 16px */
+    border: 0.125rem solid transparent; /* 2px */
+    background-color: transparent;
+    backdrop-filter: blur(0px);
+    /* Convert px to rem */
+    border-radius: 0.375rem; /* 6px */
+    transition: background-color 0.3s ease, border 0.3s ease, backdrop-filter 0.3s ease, padding 0.3s ease, border-radius 0.3s ease, opacity 0.5s ease-in-out; /* Added border-radius */
+    /* Ensure it's visible when fade-in happens */
+    opacity: 1;
+    /* ADDED Absolute Positioning Defaults */
+    position: absolute;
+    top: 60%; /* Default Y */
+    left: 50%; /* Default X */
+    transform: translate(-50%, -50%); /* Center at coordinates */
+    display: inline-block; /* Keep inline-block for border/padding */
+}
+#clockWrapper.fade-out {
+    opacity: 0;
+}
+#clockWrapper.fade-in {
+    opacity: 1;
+}
+
+#clock {
+    /* Clock itself doesn't need transitions if wrapper handles fade */
+    /* Base styles - JS will override font/size/color/shadow */
+    /* Convert px to rem */
+    font-size: 4.5rem; /* 72px */
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    color: white;
+    /* text-shadow: 2px 2px 5px rgba(0,0,0,0.8); */ /* Base shadow set by JS */
+}
+
+#realtimeMessageDisplay {
+    /* Prevent text selection */
+    user-select: none; /* Standard */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+    transition: opacity 0.5s ease-in-out;
+    /* ADDED Absolute Positioning Defaults (match clock) */
+    position: absolute;
+    top: 60%; /* Default Y */
+    left: 50%; /* Default X */
+    transform: translate(-50%, -50%); /* Center at coordinates */
+    width: max-content; /* Prevent wrapping issues */
+    max-width: 90%; /* Avoid overflow */
+    /* Base styles - JS will override font/size/color/shadow */
+    /* Convert px to rem */
+    font-size: 2.7rem; /* ~43px */
+    line-height: 1.2; /* Use unitless line-height */
+    font-weight: 600;
+    color: white;
+    /* text-shadow: 1px 1px 3px rgba(0,0,0,0.7); */ /* Base shadow set by JS */
+    opacity: 1;
+}
+#realtimeMessageDisplay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+}
+#realtimeMessageDisplay.fade-in {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Video background for main timer */
+#videoBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    z-index: -1;
+}
+
+/* Image background for main timer */
+#imageBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Cover the area, cropping if needed */
+    z-index: -1; /* Behind content */
+    background-color: #000; /* Fallback color */
+}
+
+/* Style for disabled file inputs (optional) */
+input[type="file"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+select:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: #f3f4f6; /* Light gray background */
+}
+
+/* Overlay style */
+#backgroundOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Default 50% black, JS will override */
+    z-index: 0;
+    transition: background-color 0.3s ease; /* Smooth transition for opacity changes */
+}
+
+/* Custom Scrollbar for Control Panel */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #1f2937; /* gray-800 */
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #4b5563; /* gray-600 */
+    border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* gray-500 */
+}
+/* The studio uses readable text sizes; the OBS display keeps viewport scaling. */
+html[data-page="control"] { font-size: 16px; color-scheme: dark; }
+html[data-page="control"] body {
+    background: radial-gradient(ellipse at top right, #172b49 0, transparent 55%), #0b1120;
+    line-height: 1.5;
+}
+.app-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 2rem; border-bottom: 1px solid #25334b; }
+.app-brand { color: #f8fafc; font-size: 1.35rem; font-weight: 800; letter-spacing: -.04em; }
+.app-brand span { display: block; color: #7dd3fc; font-size: .65rem; letter-spacing: .2em; margin-top: .1rem; }
+.app-header-caption { color: #94a3b8; font-size: .85rem; }
+html[data-page="control"] main { width: 100%; max-width: 1800px; margin: 0 auto; }
+#authContainer { padding-top: clamp(1rem, 6vh, 5rem); max-width: 440px; }
+#loginScreen, #registerScreen, #controlPanel { border: 1px solid #2a3850; background: #111c2e; border-radius: 1rem; box-shadow: 0 16px 48px #0003; }
+#mainContent { min-width: 0; gap: 1.5rem; }
+#controlPanel { width: 440px; max-width: 100%; height: calc(100dvh - 180px); min-height: 540px; }
+#previewPane { flex: 1; min-width: 0; position: sticky; top: 1.5rem; }
+#iframePreviewContainer { border: 1px solid #334155; box-shadow: 0 20px 55px #0005; }
+html[data-page="control"] :is(button, a, input, select, textarea):focus-visible { outline: 2px solid #7dd3fc; outline-offset: 3px; }
+html[data-page="control"] button { min-height: 40px; }
+html[data-page="control"] button:disabled { opacity: .45; cursor: not-allowed; }
+html[data-page="control"] :is(input, select, textarea) { max-width: 100%; }
+html[data-page="control"] input[type="file"] { min-width: 0; }
+html[data-page="control"] .text-gray-500 { color: #94a3b8; }
+#viewTimerLink { color: #7dd3fc; }
+#appFooter { color: #94a3b8; line-height: 1.8; }
+#toastContainer { max-width: calc(100vw - 2rem); }
+@media (max-width: 1100px) {
+    #mainContent { flex-direction: column; }
+    #controlPanel { width: 100%; height: auto; min-height: 0; }
+    #controlPanel > .overflow-y-auto { overflow: visible; }
+    #previewPane { width: 100%; position: static; }
+}
+@media (max-width: 480px) {
+    .app-header { padding: 1rem; }
+    .app-header-caption { display: none; }
+    #controlPanel { padding: 1rem; }
+    #controlPanel > div:first-child { flex-wrap: wrap; gap: .75rem; }
+    #loginScreen, #registerScreen { padding: 1.5rem; }
+    #appFooter { padding-inline: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html[data-page="control"] *, html[data-page="control"] *::before, html[data-page="control"] *::after { transition: none !important; animation: none !important; }
+}
+#statusText { max-width: 240px; overflow-wrap: anywhere; text-align: right; }
+
+/* Workspace */
+html[data-page="control"] main { max-width: none; padding: 16px; gap: 16px; }
+.app-header { padding: 10px 20px; }
+#mainContent { gap: 20px; align-items: flex-start; }
+#controlPanel { width: clamp(480px, 36vw, 720px); height: calc(100dvh - 105px); padding: 24px; }
+#previewPane { top: 16px; }
+html[data-page="control"] #appFooter { margin: 0; padding: 4px 16px; font-size: 11px; }
+#previewUploadStatus { padding: 8px 0; color: #cbd5e1; font-size: 14px; }
+#selectionGizmo { position: fixed; z-index: 1000; border: 1px solid #38bdf8; pointer-events: none; box-sizing: border-box; }
+#selectionGizmo[hidden] { display: none; }
+#selectionGizmo button { position: absolute; width: 26px; height: 26px; min-height: 0; padding: 0; background: #0284c7; border: 2px solid white; border-radius: 5px; color: white; font: 18px/22px sans-serif; pointer-events: auto; touch-action: none; }
+#selectionGizmo [data-action="scale"] { right: -13px; bottom: -13px; cursor: nwse-resize; }
+#selectionGizmo [data-action="rotate"] { left: calc(50% - 13px); top: -36px; border-radius: 50%; cursor: grab; }
+#selectionGizmo [data-action="rotate"]::after { content: ''; position: absolute; top: 24px; left: 10px; height: 10px; border-left: 1px solid #38bdf8; }
+.interactive-mode.file-dragover::after { content: 'Bestanden plaatsen'; position: fixed; inset: 4px; z-index: 2000; border: 3px dashed #38bdf8; background: #0284c733; color: white; display: grid; place-items: center; font: 18px sans-serif; pointer-events: none; }
+@media (max-width: 1100px) {
+    #controlPanel { width: 100%; height: auto; }
+    #previewPane { position: static; }
+}
+@media (max-width: 480px) {
+    html[data-page="control"] main { padding: 8px; }
+    #controlPanel { padding: 16px; }
+}
+
+#selectionGizmo [data-action="delete"] { right: -13px; top: -36px; background: #b91c1c; cursor: pointer; }
